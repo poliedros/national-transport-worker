@@ -5,3 +5,7 @@
 ```
 docker run -e REDIS_HOST=host.docker.internal -e REDIS_PORT=6379 -d carloszan/national-transport-worker:v1
 ```
+
+```
+docker exec -it myredis sh
+```
