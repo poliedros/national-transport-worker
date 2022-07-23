@@ -12,7 +12,7 @@ export class ApiService {
         'https://api.nationaltransport.ie/gtfsr/v1?format=json',
         {
           headers: {
-            'X-API-KEY': '924e833c1f334b19a6c38f422e0ec34a',
+            'X-API-KEY': `${process.env.NATIONAL_TRANSPORT_TOKEN}`,
           },
         },
       ),
