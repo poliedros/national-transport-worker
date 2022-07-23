@@ -1,4 +1,4 @@
-import { CacheModule, Module } from '@nestjs/common';
+import { CacheModule, CACHE_MANAGER, Inject, Module } from '@nestjs/common';
 import { RedisService } from './redis.service';
 import type { ClientOpts } from 'redis';
 import * as redisStore from 'cache-manager-redis-store';
@@ -14,4 +14,11 @@ import * as redisStore from 'cache-manager-redis-store';
   ],
   providers: [RedisService],
 })
-export class RedisModule {}
+export class RedisModule {
+  constructor(@Inject(CACHE_MANAGER) private cacheManager) {}
+
+  onModuleDestroy() {
+    const redisClient = this.cacheManager.store.getClient();
+    redisClient.quit();
+  }
+}
